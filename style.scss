@@ -1,0 +1,60 @@
+$mycolor: #c7c;
+$color1: darken($mycolor, 53%);
+$color2: darken($mycolor, 33%);
+$color3: darken($mycolor, 23%);
+$pixels: 8px;
+
+$prefixes:(-webkit- -moz- -ms- -o- "");
+
+@mixin round($pixels) {
+
+    @each $prefix in $prefixes{
+        #{$prefix}border-radius: $pixels;
+    }
+    
+
+}
+
+@mixin gradient($top-color, $bottom-color) {
+  
+    @each $prefix in $prefixes{
+        background-image: #{$prefix}linear-gradient($top-color, $bottom-color);
+    }
+    
+}
+
+@mixin round-grad($pixels, $top-color, $bottom-color, $isgrad) {
+
+    @if $isgrad {
+        @each $prefix in $prefixes{
+            background-image: #{$prefix}linear-gradient($top-color, $bottom-color);
+        }
+    }
+    @else{
+        @each $prefix in $prefixes{
+            #{$prefix}border-radius: $pixels;
+        }
+    }
+    
+}
+@mixin p($pref-first, $property, $value) {
+  @each $prefix in $prefixes {
+    @if $pref-first {
+      #{$prefix}#{$property}: $value;
+    } @else {
+      #{$property}: #{$prefix}#{$value};
+    }
+  }
+}
+
+.img-thumbnail {
+    @include p(true, border-radius, $pixels);
+    @include p(false, background-image, linear-gradient($color2, $color3));
+}
+
+body.dark {
+	color: $mycolor;
+	background-color: $color1;
+}
+
+
