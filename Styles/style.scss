@@ -52,9 +52,13 @@ $prefixes:(-webkit- -moz- -ms- -o- "");
     @include p(false, background-image, linear-gradient($color2, $color3));
 }
 
-body.dark {
+.dark {
 	color: $mycolor;
 	background-color: $color1;
 }
 
+a.navbar-brand {
+	font-size: 17pt;
+	color: darkorange;
+}
 
